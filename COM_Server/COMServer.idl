@@ -1,0 +1,51 @@
+﻿// COM_Server.idl: источник языка IDL для COM_Server
+//
+
+// Этот файл будет обработан средством MIDL для
+// создание библиотеки типов ($handlersafeidlname$.tlb) и кода маршалирования.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(ca2d3aeb-23ca-472d-b682-88bbdde615a2),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IBinaryFile : IDispatch
+{
+	//[propget, id(1)] HRESULT filePath([out, retval] BSTR* pVal);
+	//[propput, id(1)] HRESULT filePath([in] BSTR newVal);
+	//[id(2)] void PrintPath();
+	//[id(3)] HRESULT printFilePath([out] BSTR* filePath);
+	[propget, id(2)] HRESULT sourceFilePath([out, retval] BSTR* pVal);
+	[propput, id(2)] HRESULT sourceFilePath([in] BSTR newVal);
+	[propget, id(3)] HRESULT resultFilePath([out, retval] BSTR* pVal);
+	[propput, id(3)] HRESULT resultFilePath([in] BSTR newVal);
+	[propget, id(4)] HRESULT orderingMode([out, retval] VARIANT_BOOL* pVal);
+	[propput, id(4)] HRESULT orderingMode([in] VARIANT_BOOL newVal);
+	[id(5)] HRESULT sortBinaryFile([out] VARIANT_BOOL* isRun);
+	[id(6)] HRESULT setResultFilesDir([in] BSTR newVal);
+	[id(7)] HRESULT openSourceFileAndFillDigits();
+	[id(8)] HRESULT openAndFillResultFile();
+	[id(9)] HRESULT stopSorting();
+};
+[
+	uuid(09955f16-7c0a-4652-b40d-5243d1508fcb),
+	version(1.0),
+]
+library COMServerLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(6d7412e1-abf6-4060-9e47-bc9e059a498f)
+	]
+	coclass BinaryFile
+	{
+		[default] interface IBinaryFile;
+	};
+};
+
+import "shobjidl.idl";
