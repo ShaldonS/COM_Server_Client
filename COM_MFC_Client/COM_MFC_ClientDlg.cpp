@@ -150,7 +150,7 @@ void CCOMMFCClientDlg::OnBnClickedOk()
 	//int cnt = 0;
 
 	//AfxBeginThread((AFX_THREADPROC)setfilesProcededCount, this);
-	std::string sourceFilePath(sourceDirPathStr);
+
 	IBinaryFile* binaryFile;
 	HRESULT hr = CoCreateInstance(CLSID_BinaryFile, nullptr, CLSCTX_INPROC_SERVER,
 		IID_IBinaryFile, (LPVOID*)&binaryFile);
@@ -160,7 +160,8 @@ void CCOMMFCClientDlg::OnBnClickedOk()
 			AfxMessageBox(_T("Error setting ordering mode"));
 		}
 		for (const auto& entry : fs::directory_iterator(sourceDirPathStr)) {
-			sourceFilePath.append(entry.path().filename().string());
+			std::string sourceFilePath(sourceDirPathStr);
+                        sourceFilePath.append(entry.path().filename().string());
 		
 			VARIANT_BOOL isRun = run;
 			BSTR param1, param2;
